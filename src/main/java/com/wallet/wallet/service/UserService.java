@@ -2,12 +2,17 @@ package com.wallet.wallet.service;
 
 import java.util.Optional;
 
-import com.wallet.wallet.entity.User;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import com.wallet.wallet.entity.UserData;
+
+@Service
+@Component
 public interface UserService {
 
-    User save(User u);
+    UserData save(UserData u);
 
-    Optional<User> findByEmail(String email);
+    Optional<UserData> findByEmail(String email);
 
 }

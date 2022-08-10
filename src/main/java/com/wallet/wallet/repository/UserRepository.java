@@ -3,10 +3,14 @@ package com.wallet.wallet.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-import com.wallet.wallet.entity.User;
+import com.wallet.wallet.entity.UserData;
 
-public interface UserRepository extends JpaRepository<User, Long>{
+@Repository
+@Component
+public interface UserRepository extends JpaRepository<UserData, Long>{
 
-    Optional<User> findByEmailEquals(String email);
+    Optional<UserData> findByEmailEquals(String email);
 }

@@ -12,12 +12,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.wallet.wallet.entity.User;
+import com.wallet.wallet.entity.UserData;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("teste")
 public class UserRepositoryTest {
     
     private static final String EMAIL = "email@teste.com";
@@ -26,7 +28,7 @@ public class UserRepositoryTest {
 
     @Before
     public void setUp(){
-        User u = new User();
+        UserData u = new UserData();
         u.setName("Set up User");
         u.setPassword("Senha123");
         u.setEmail(EMAIL);
@@ -44,7 +46,7 @@ public class UserRepositoryTest {
 
     @Test
     public void testFindByEmail(){
-        Optional<User> response = repository.findByEmailEquals(EMAIL);
+        Optional<UserData> response = repository.findByEmailEquals(EMAIL);
 
         assertTrue(response.isPresent());
         assertEquals(response.get().getEmail(), EMAIL);
@@ -52,12 +54,12 @@ public class UserRepositoryTest {
 
     @Test
     public void testSave(){
-        User u = new User();
+        UserData u = new UserData();
         u.setName("Teste");
         u.setPassword("123456");
         u.setEmail("teste@teste.com");
 
-        User response = repository.save(u);
+        UserData response = repository.save(u);
 
         assertNotNull(response);
     }
