@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
@@ -17,6 +16,7 @@ import com.wallet.wallet.dto.UserDTO;
 import com.wallet.wallet.entity.UserData;
 import com.wallet.wallet.response.Response;
 import com.wallet.wallet.service.UserService;
+import com.wallet.wallet.util.Bcrypt;
 
 
 @RestController
@@ -31,6 +31,10 @@ public class UserController {
 
         Response<UserDTO> response = new Response<UserDTO>();
 
+        if (result.hasErrors()){
+            result.getAllErrors().forEach(e -> response.getErros().add(e.getDefaultMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
         UserData user = service.save(this.converDtoToEntity(dto));
         
         response.setData(this.converEntityToDto(user));
@@ -40,18 +44,19 @@ public class UserController {
 
     private UserData converDtoToEntity(UserDTO dto){
         UserData u = new UserData();
+        u.setId(dto.getId());
         u.setEmail(dto.getEmail());
         u.setName(dto.getName());
-        u.setPassword(dto.getPassword());
+        u.setPassword(Bcrypt.getHash(dto.getPassword()));
 
         return u;
     }
 
     private UserDTO converEntityToDto(UserData dto){
         UserDTO u = new UserDTO();
+        u.setId(dto.getId());
         u.setEmail(dto.getEmail());
         u.setName(dto.getName());
-        u.setPassword(dto.getPassword());
 
         return u;
     }
