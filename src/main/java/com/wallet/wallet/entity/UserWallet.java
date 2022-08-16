@@ -2,8 +2,6 @@ package com.wallet.wallet.entity;
 
 import java.io.Serializable;
 
-import org.apache.catalina.User;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +24,7 @@ public class UserWallet implements Serializable{
     private Long id;
     @JoinColumn(name = "users", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
-    private User users;
+    private UserData users;
     @JoinColumn(name = "wallet", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Wallet wallet;
