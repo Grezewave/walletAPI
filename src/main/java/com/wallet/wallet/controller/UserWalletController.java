@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wallet.wallet.dto.UserWalletDTO;
-import com.wallet.wallet.dto.WalletDTO;
 import com.wallet.wallet.entity.UserData;
 import com.wallet.wallet.entity.UserWallet;
 import com.wallet.wallet.entity.Wallet;
