@@ -6,7 +6,11 @@ import java.util.Date;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.wallet.wallet.util.enums.TypeEnum;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,7 +41,8 @@ public class WalletItem implements Serializable{
     @NotNull
     private Date date;
     @NotNull
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private TypeEnum type;
     @NotNull
     private String description;
     @NotNull
