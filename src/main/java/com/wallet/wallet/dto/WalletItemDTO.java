@@ -1,6 +1,7 @@
 package com.wallet.wallet.dto;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.hibernate.validator.constraints.Length;
@@ -16,9 +17,9 @@ public class WalletItemDTO {
 
     private Long id;
     @NotNull(message = "Insira o ID da carteira")
-    private Wallet wallet;
+    private Long wallet;
     @NotNull(message = "Informe uma data")
-    private Date date;
+    private String date;
     @NotNull(message = "Informe um tipo")
     @Pattern(regexp = "^(ENTRADA|SAIDA)$", message = "O tipo deve ser ENTRADA ou SAIDA")
     private String type;
@@ -27,4 +28,5 @@ public class WalletItemDTO {
     private String description;
     @NotNull
     private BigDecimal value;
+
 }

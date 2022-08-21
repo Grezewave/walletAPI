@@ -150,7 +150,7 @@ public class WalletItemRepositoryTest {
     }
 
     @Test
-    public void testFindByTypeSd() {
+    public void testFindByTypeSd(){
 
         Optional<Wallet> w = walletRepository.findById(savedWalletId);
 
@@ -162,4 +162,14 @@ public class WalletItemRepositoryTest {
         assertEquals(response.get(0).getType(), TypeEnum.SD);
     }
     
+    @Test
+    public void testSumByWallet(){
+        Optional<Wallet> w = walletRepository.findById(savedWalletId);
+
+        repository.save(new WalletItem(null, w.get(), DATE, TYPE, DESCRIPTION, BigDecimal.valueOf(150.8)));
+
+        BigDecimal response = repository.sumByWalletId(savedWalletId);
+
+        assertEquals(response.compareTo(BigDecimal.valueOf(215.8)), 0);
+    }
 }
